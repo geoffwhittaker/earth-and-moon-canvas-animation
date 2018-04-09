@@ -1,0 +1,80 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Geoff Whittaker earth and moon orbit</title>
+  <meta name="description" content="Space theme">
+  <meta name="author" content="Geoffrey Whittaker">
+</head>
+
+<body>
+<div class="container">
+
+<canvas width="500px" height="300px" id="earthMoon"></canvas>
+
+<script>
+var canvas = document.getElementById('earthMoon');
+var ctx = canvas.getContext('2d');
+var w = canvas.width;
+var h = canvas.height;
+
+
+
+var circle = function(color, r) {
+     ctx.fillStyle = color;
+// draw circle for planets
+    ctx.beginPath();
+    ctx.arc(0, 0, r, 0, 2 * Math.PI, true);
+    ctx.closePath();
+    ctx.fill();
+}
+
+var i = 0;
+var redraw = function() {
+    ctx.save();
+
+
+    // paint bg
+    ctx.fillStyle = 'black';
+    ctx.fillRect(0, 0, w, h);
+
+    // set origin to center
+    ctx.translate(w / 2, h / 2);
+
+    // draw sun
+    circle('yellow', 20);
+    
+
+    // rotate + move along x
+    ctx.rotate(i*Math.PI/180);
+    ctx.translate(100, 0);
+
+    // draw planet
+    circle('blue', 10);
+
+    // rotate + move along x
+    ctx.rotate(i*Math.PI/180);
+    ctx.translate (25, 0);
+    // draw planet
+    circle('brown', 5);
+
+   ctx.restore();
+
+    i++;
+
+    window.requestAnimationFrame(redraw);
+};
+
+window.requestAnimationFrame(redraw);
+
+
+
+
+</script>
+</div>
+</body>
+</html>
